@@ -10,10 +10,14 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         height: 600,
         width: 800,
+        minHeight: 480,
+        minWidth: 640,
+        icon: __dirname + '/../icon.png'
     });
 
     // and load the index.html of the app.
-    mainWindow.loadFile(path.join(__dirname, "app/index.html"));
+    //mainWindow.loadFile(path.join(__dirname, "app/index.html"));
+    mainWindow.loadURL('http://localhost:9482/index.html');
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
