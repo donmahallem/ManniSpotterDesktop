@@ -1,9 +1,11 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
+import { ApiServer } from "./api-server";
 
 let mainWindow: Electron.BrowserWindow;
-
+let apiServer: ApiServer = new ApiServer();
 function createWindow() {
+    apiServer.start();
     // Create the browser window.
     mainWindow = new BrowserWindow({
         height: 600,
@@ -11,7 +13,7 @@ function createWindow() {
     });
 
     // and load the index.html of the app.
-    mainWindow.loadFile(path.join(__dirname, "index.html"));
+    mainWindow.loadFile(path.join(__dirname, "app/index.html"));
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
@@ -36,6 +38,7 @@ app.on("window-all-closed", () => {
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== "darwin") {
         app.quit();
+        apiServer.stop();
     }
 });
 
