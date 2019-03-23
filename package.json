@@ -1,0 +1,19 @@
+{
+  "name": "mannispotterdesktop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "start": "npm run build && electron ./dist/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^4.1.1",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000"
+  }
+}
