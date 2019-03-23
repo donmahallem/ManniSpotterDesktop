@@ -1,0 +1,1 @@
+# Manni Spotter Desktop Client
