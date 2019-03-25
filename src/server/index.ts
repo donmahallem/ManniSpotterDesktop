@@ -1,1 +1,1 @@
-export * from "./stop.departures";
+export * from "./api-routes";
