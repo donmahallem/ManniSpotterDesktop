@@ -26,6 +26,7 @@
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
     "@types/sinon": "^7.0.10",
+    "asar": "^1.0.0",
     "chai": "^4.2.0",
     "electron": "^4.1.1",
     "mocha": "^6.0.2",
