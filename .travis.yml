@@ -40,6 +40,7 @@ jobs:
     - npm install
     - ng build --aot --prod --base-href=./
     - cd ..
+    - cp -r ./ngManniSpotter/dist/manniweb ./dist/app
     - npm run build:asar
     #if: tag IS present
     deploy:
