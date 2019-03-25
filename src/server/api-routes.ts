@@ -3,7 +3,7 @@ import { TrapezeApiClient, VehicleStorage } from '@donmahallem/trapeze-api-clien
 import { getStations, getVehicleLocations, getTripPassages, getStopDepartures, getRouteByVehicleId, getRouteByTripId, getStopDepartures2, getStopDepartures3 } from "./";
 const app: express.Router = express.Router();
 
-const trapezeApi: TrapezeApiClient = new TrapezeApiClient('https://kvg-kiel.de/');
+const trapezeApi: TrapezeApiClient = new TrapezeApiClient(process.argv[2]);
 const str: VehicleStorage = new VehicleStorage(trapezeApi, 30000);
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
