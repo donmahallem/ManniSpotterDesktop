@@ -15,19 +15,6 @@ export function getStopDepartures(stopId) {
         method: "POST",
         uri: "https://www.kvg-kiel.de/internetservice/services/passageInfo/stopPassages/stop",
     };
-    /*
-    const options = {
-        method: 'POST',
-        uri: 'https://kvg-kiel.de/internetservice/services/routeInfo/routeStops',
-        form: {
-            // Like <input type="text" name="name">
-            routeId: routeId
-        },
-        headers: {
-            'User-Agent': 'Request-Promise'
-        },
-        json: true // Automatically parses the JSON string in the response
-    };*/
     return reqp(options);
 }
 
@@ -48,19 +35,6 @@ export function getStopDepartures2(stopId) {
         uri: "https://www.kvg-kiel.de/internetservice/services/stopInfo/stop",
 
     };
-    /*
-    const options = {
-        method: 'POST',
-        uri: 'https://kvg-kiel.de/internetservice/services/routeInfo/routeStops',
-        form: {
-            // Like <input type="text" name="name">
-            routeId: routeId
-        },
-        headers: {
-            'User-Agent': 'Request-Promise'
-        },
-        json: true // Automatically parses the JSON string in the response
-    };*/
     return reqp(options);
 }
 
@@ -80,18 +54,5 @@ export function getStopDepartures3(stopId) {
         method: "POST",
         uri: "https://www.kvg-kiel.de/internetservice/services/stopInfo/stopPoint",
     };
-    /*
-    const options = {
-        method: 'POST',
-        uri: 'https://kvg-kiel.de/internetservice/services/routeInfo/routeStops',
-        form: {
-            // Like <input type="text" name="name">
-            routeId: routeId
-        },
-        headers: {
-            'User-Agent': 'Request-Promise'
-        },
-        json: true // Automatically parses the JSON string in the response
-    };*/
     return reqp(options);
 }

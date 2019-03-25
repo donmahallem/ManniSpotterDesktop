@@ -1,11 +1,6 @@
 import { TrapezeApiClient, VehicleStorage } from "@donmahallem/trapeze-api-client";
 import * as express from "express";
 import {
-    getRouteByTripId,
-    getRouteByVehicleId, getStations,
-    getStopDepartures, getStopDepartures2,
-    getStopDepartures3, getTripPassages,
-    getVehicleLocations,
 } from "./";
 const app: express.Router = express.Router();
 
@@ -17,7 +12,7 @@ app.use((req, res, next) => {
     next();
 });
 app.get("/api/geo/stations", (req, res) => {
-    getStations()
+    trapezeApi.getStations()
         .then((dataRes) => {
             res.json(dataRes);
         }).catch((err) => {
@@ -37,7 +32,7 @@ app.get("/api/geo/vehicles", (req, res) => {
                     .send("error");
             });
     } else {
-        getVehicleLocations()
+        trapezeApi.getVehicleLocations()
             .then((dataRes) => {
                 res.json(dataRes);
             }).catch((err) => {
@@ -48,7 +43,7 @@ app.get("/api/geo/vehicles", (req, res) => {
 });
 
 app.get("/api/trip/:id/passages", (req, res) => {
-    Promise.all([getTripPassages(req.params.id, req.query.mode), str.getVehicleByTripId(req.params.id)])
+    Promise.all([trapezeApi.getTripPassages(req.params.id, req.query.mode), str.getVehicleByTripId(req.params.id)])
         .then((result) => {/*
             const resp = {
                 passages: result[0],
@@ -70,7 +65,7 @@ app.get("/api/trip/:id/passages", (req, res) => {
 });
 
 app.get("/api/vehicle/:id/route", (req, res) => {
-    getRouteByVehicleId(req.params.id)
+    trapezeApi.getRouteByVehicleId(req.params.id)
         .then((result) => {
             res.json(result);
         })
@@ -79,7 +74,7 @@ app.get("/api/vehicle/:id/route", (req, res) => {
         });
 });
 app.get("/api/trip/:id/route", (req, res) => {
-    getRouteByTripId(req.params.id)
+    trapezeApi.getRouteByTripId(req.params.id)
         .then((result) => {
             res.json(result);
         })
@@ -88,7 +83,7 @@ app.get("/api/trip/:id/route", (req, res) => {
         });
 });
 app.get("/api/stop/:id/departures", (req, res) => {
-    getStopDepartures(req.params.id)
+    trapezeApi.getStopInfo(req.params.id)
         .then((result) => {
             res.json(result);
         })
@@ -97,7 +92,7 @@ app.get("/api/stop/:id/departures", (req, res) => {
         });
 });
 app.get("/api/stop/:id/info", (req, res) => {
-    getStopDepartures2(req.params.id)
+    trapezeApi.getStopInfo(req.params.id)
         .then((result) => {
             res.json(result);
         })
@@ -106,7 +101,7 @@ app.get("/api/stop/:id/info", (req, res) => {
         });
 });
 app.get("/api/stopPoint/:id/info", (req, res) => {
-    getStopDepartures3(req.params.id)
+    trapezeApi.getStopPointInfo(req.params.id)
         .then((result) => {
             res.json(result);
         })
