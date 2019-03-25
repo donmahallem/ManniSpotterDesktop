@@ -14,8 +14,6 @@ export class ApiServer {
     }
 
     public stop() {
-        this.server.close((err) => {
-            console.log("Server closed", err);
-        });
+        this.server.close(); // (err) => { });
     }
 }

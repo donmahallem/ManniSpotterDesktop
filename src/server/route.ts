@@ -3,18 +3,19 @@ import * as reqp from "request-promise-native";
 
 export function getRouteByVehicleId(vehicleId) {
     const options = {
-        method: "POST",
-        uri: "https://www.kvg-kiel.de/internetservice/geoserviceDispatcher/services/pathinfo/vehicle",
-        query: {
-            // Like <input type="text" name="name">
-            id: vehicleId,
-        },
         headers: {
             // 'Referer': "https://www.kvg-kiel.de/fahrplan/echtzeit/",
             "User-Agent": "Request-Promise",
             // 'Origin': 'https://www.kvg-kiel.de'
         },
-        json: true, // Automatically parses the JSON string in the response
+        json: true,
+        method: "POST",
+        query: {
+            // Like <input type="text" name="name">
+            id: vehicleId,
+        },
+        uri: "https://www.kvg-kiel.de/internetservice/geoserviceDispatcher/services/pathinfo/vehicle",
+
     };
     /*
     const options = {
@@ -34,18 +35,16 @@ export function getRouteByVehicleId(vehicleId) {
 
 export function getRouteByTripId(vehicleId) {
     const options = {
+        headers: {
+            "User-Agent": "Request-Promise",
+        },
+        json: true,
         method: "POST",
-        uri: "https://www.kvg-kiel.de/internetservice/geoserviceDispatcher/services/pathinfo/trip",
         qs: {
             // Like <input type="text" name="name">
             id: vehicleId,
         },
-        headers: {
-            // 'Referer': "https://www.kvg-kiel.de/fahrplan/echtzeit/",
-            "User-Agent": "Request-Promise",
-            // 'Origin': 'https://www.kvg-kiel.de'
-        },
-        json: true, // Automatically parses the JSON string in the response
+        uri: "https://www.kvg-kiel.de/internetservice/geoserviceDispatcher/services/pathinfo/trip",
     };
     /*
     const options = {

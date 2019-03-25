@@ -3,19 +3,17 @@ import * as reqp from "request-promise-native";
 
 export function getStopDepartures(stopId) {
     const options = {
-        method: "POST",
-        uri: "https://www.kvg-kiel.de/internetservice/services/passageInfo/stopPassages/stop",
         form: {
             // Like <input type="text" name="name">
             mode: "departure",
             stop: stopId,
         },
         headers: {
-            // 'Referer': "https://www.kvg-kiel.de/fahrplan/echtzeit/",
             "User-Agent": "Request-Promise",
-            // 'Origin': 'https://www.kvg-kiel.de'
         },
-        json: true, // Automatically parses the JSON string in the response
+        json: true,
+        method: "POST",
+        uri: "https://www.kvg-kiel.de/internetservice/services/passageInfo/stopPassages/stop",
     };
     /*
     const options = {
@@ -35,8 +33,6 @@ export function getStopDepartures(stopId) {
 
 export function getStopDepartures2(stopId) {
     const options = {
-        method: "POST",
-        uri: "https://www.kvg-kiel.de/internetservice/services/stopInfo/stop",
         form: {
             // Like <input type="text" name="name">
             mode: "departure",
@@ -48,6 +44,9 @@ export function getStopDepartures2(stopId) {
             // 'Origin': 'https://www.kvg-kiel.de'
         },
         json: true, // Automatically parses the JSON string in the response
+        method: "POST",
+        uri: "https://www.kvg-kiel.de/internetservice/services/stopInfo/stop",
+
     };
     /*
     const options = {

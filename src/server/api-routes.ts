@@ -25,7 +25,6 @@ app.get("/api/geo/stations", (req, res) => {
         });
 });
 app.get("/api/geo/vehicles", (req, res) => {
-    console.log("Queried", req.query.left, req.query.right, req.query.top, req.query.bottom);
     if (!isNaN(req.query.left) && !isNaN(req.query.left) && !isNaN(req.query.left) && !isNaN(req.query.left)) {
         str.getVehicles(req.query.left,
             req.query.right,
@@ -70,7 +69,7 @@ app.get("/api/trip/:id/passages", (req, res) => {
         });
 });
 
-app.get("/api/vehicle/:id/route", function(req, res) {
+app.get("/api/vehicle/:id/route", (req, res) => {
     getRouteByVehicleId(req.params.id)
         .then((result) => {
             res.json(result);
@@ -94,7 +93,6 @@ app.get("/api/stop/:id/departures", (req, res) => {
             res.json(result);
         })
         .catch((err) => {
-            console.error(err);
             res.status(500).send("err");
         });
 });
@@ -104,7 +102,6 @@ app.get("/api/stop/:id/info", (req, res) => {
             res.json(result);
         })
         .catch((err) => {
-            console.error(err);
             res.status(500).send("err");
         });
 });
@@ -114,7 +111,6 @@ app.get("/api/stopPoint/:id/info", (req, res) => {
             res.json(result);
         })
         .catch((err) => {
-            console.error(err);
             res.status(500).send("err");
         });
 });

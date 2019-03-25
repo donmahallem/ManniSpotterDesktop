@@ -8,8 +8,8 @@ export function getVehicleLocations() {
         },
         json: true,
         qs: {
-            positionType: "CORRECTED",
             colorType: "ROUTE",
+            positionType: "CORRECTED",
         },
         uri: "https://kvg-kiel.de/internetservice/geoserviceDispatcher/services/vehicleinfo/vehicles",
         // Automatically parses the JSON string in the response
