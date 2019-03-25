@@ -7,3 +7,5 @@ coverage/
 testdata.json
 testconfig.json
 docs/
+build/
+release/*.asar
