@@ -41,7 +41,7 @@ jobs:
     - ng build --aot --prod --base-href=./
     - cd ..
     - npm run build:asar
-    if: tag IS present
+    #if: tag IS present
     deploy:
       provider: releases
       skip_cleanup: true
