@@ -3,21 +3,21 @@ import * as path from "path";
 import { ApiServer } from "./api-server";
 
 let mainWindow: Electron.BrowserWindow;
-let apiServer: ApiServer = new ApiServer();
+const apiServer: ApiServer = new ApiServer();
 function createWindow() {
     apiServer.start();
     // Create the browser window.
     mainWindow = new BrowserWindow({
         height: 600,
-        width: 800,
+        icon: __dirname + "/../icon.png",
         minHeight: 480,
         minWidth: 640,
-        icon: __dirname + '/../icon.png'
+        width: 800,
     });
 
     // and load the index.html of the app.
-    //mainWindow.loadFile(path.join(__dirname, "app/index.html"));
-    mainWindow.loadURL('http://localhost:9482/index.html');
+    // mainWindow.loadFile(path.join(__dirname, "app/index.html"));
+    mainWindow.loadURL("http://localhost:9482/index.html");
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();

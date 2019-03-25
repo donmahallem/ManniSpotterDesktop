@@ -6,10 +6,17 @@
   "scripts": {
     "build": "npm run build:pug && npm run build:typescript",
     "watch": "tsc -w",
-    "lint": "tslint -c tslint.json -p tsconfig.json",
     "start": "npm run build && electron ./dist/main.js",
     "build:pug": "pug src --out ./dist",
-    "build:typescript": "tsc"
+    "build:typescript": "tsc",
+    "test-ci": "nyc npm run test",
+    "lint": "tslint -c tslint.json -p tsconfig.json -e src/**/*.spec.ts src/**/*.ts",
+    "lint-fix": "tslint --fix -c tslint.json -p tsconfig.json -e src/**/*.spec.ts src/**/*.ts",
+    "docs": "typedoc --options typedoc.json",
+    "test:lint": "npm run lint",
+    "test:build": "npm run build",
+    "test:unit": "npm run test-ci",
+    "test:docs": "npm run docs"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +24,7 @@
     "electron": "^4.1.1",
     "pug-cli": "^1.0.0-alpha6",
     "tslint": "^5.14.0",
+    "typedoc": "^0.14.2",
     "typescript": "^3.3.4000"
   },
   "dependencies": {

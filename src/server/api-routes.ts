@@ -1,48 +1,54 @@
-import * as express from 'express';
-import { TrapezeApiClient, VehicleStorage } from '@donmahallem/trapeze-api-client';
-import { getStations, getVehicleLocations, getTripPassages, getStopDepartures, getRouteByVehicleId, getRouteByTripId, getStopDepartures2, getStopDepartures3 } from "./";
+import { TrapezeApiClient, VehicleStorage } from "@donmahallem/trapeze-api-client";
+import * as express from "express";
+import {
+    getRouteByTripId,
+    getRouteByVehicleId, getStations,
+    getStopDepartures, getStopDepartures2,
+    getStopDepartures3, getTripPassages,
+    getVehicleLocations,
+} from "./";
 const app: express.Router = express.Router();
 
 const trapezeApi: TrapezeApiClient = new TrapezeApiClient(process.argv[2]);
 const str: VehicleStorage = new VehicleStorage(trapezeApi, 30000);
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-app.get('/api/geo/stations', function (req, res) {
+app.get("/api/geo/stations", (req, res) => {
     getStations()
-        .then((data_res) => {
-            res.json(data_res)
+        .then((dataRes) => {
+            res.json(dataRes);
         }).catch((err) => {
             res.status(500).send("error");
-        })
+        });
 });
-app.get('/api/geo/vehicles', function (req, res) {
+app.get("/api/geo/vehicles", (req, res) => {
     console.log("Queried", req.query.left, req.query.right, req.query.top, req.query.bottom);
     if (!isNaN(req.query.left) && !isNaN(req.query.left) && !isNaN(req.query.left) && !isNaN(req.query.left)) {
         str.getVehicles(req.query.left,
             req.query.right,
             req.query.top,
             req.query.bottom)
-            .then(data_res => {
-                res.json({ vehicles: data_res });
+            .then((dataRes) => {
+                res.json({ vehicles: dataRes });
             }).catch((err) => {
                 res.status(500)
                     .send("error");
-            })
+            });
     } else {
         getVehicleLocations()
-            .then((data_res) => {
-                res.json(data_res)
+            .then((dataRes) => {
+                res.json(dataRes);
             }).catch((err) => {
                 res.status(500)
                     .send("error");
-            })
+            });
     }
 });
 
-app.get('/api/trip/:id/passages', function (req, res) {
+app.get("/api/trip/:id/passages", (req, res) => {
     Promise.all([getTripPassages(req.params.id, req.query.mode), str.getVehicleByTripId(req.params.id)])
         .then((result) => {/*
             const resp = {
@@ -61,30 +67,28 @@ app.get('/api/trip/:id/passages', function (req, res) {
             } else {
                 res.status(500).send("err");
             }
-        })
+        });
 });
 
-app.get('/api/vehicle/:id/route', function (req, res) {
+app.get("/api/vehicle/:id/route", function(req, res) {
     getRouteByVehicleId(req.params.id)
         .then((result) => {
             res.json(result);
         })
         .catch((err) => {
-            console.error(err);
             res.status(500).send("err");
-        })
+        });
 });
-app.get('/api/trip/:id/route', function (req, res) {
+app.get("/api/trip/:id/route", (req, res) => {
     getRouteByTripId(req.params.id)
         .then((result) => {
             res.json(result);
         })
         .catch((err) => {
-            console.error(err.status);
             res.status(500).send("err");
-        })
+        });
 });
-app.get('/api/stop/:id/departures', function (req, res) {
+app.get("/api/stop/:id/departures", (req, res) => {
     getStopDepartures(req.params.id)
         .then((result) => {
             res.json(result);
@@ -92,9 +96,9 @@ app.get('/api/stop/:id/departures', function (req, res) {
         .catch((err) => {
             console.error(err);
             res.status(500).send("err");
-        })
+        });
 });
-app.get('/api/stop/:id/info', function (req, res) {
+app.get("/api/stop/:id/info", (req, res) => {
     getStopDepartures2(req.params.id)
         .then((result) => {
             res.json(result);
@@ -102,9 +106,9 @@ app.get('/api/stop/:id/info', function (req, res) {
         .catch((err) => {
             console.error(err);
             res.status(500).send("err");
-        })
+        });
 });
-app.get('/api/stopPoint/:id/info', function (req, res) {
+app.get("/api/stopPoint/:id/info", (req, res) => {
     getStopDepartures3(req.params.id)
         .then((result) => {
             res.json(result);
@@ -112,9 +116,9 @@ app.get('/api/stopPoint/:id/info', function (req, res) {
         .catch((err) => {
             console.error(err);
             res.status(500).send("err");
-        })
+        });
 });
-app.get('/api/geo/vehicle/:id', function (req, res) {
+app.get("/api/geo/vehicle/:id", (req, res) => {
     str.getVehicle(req.params.id)
         .then((result) => {
             res.send(result);
@@ -125,11 +129,11 @@ app.get('/api/geo/vehicle/:id', function (req, res) {
             } else {
                 res.status(500).send("err");
             }
-        })
+        });
 });
-//app.use(express.static(__dirname + '/app/index.html'));
-app.use(express.static(__dirname + '/../app'));
-app.get('/*', (req, res) => {
-    res.sendFile(__dirname + '/../app/index.html');
-})
+// app.use(express.static(__dirname + '/app/index.html'));
+app.use(express.static(__dirname + "/../app"));
+app.get("/*", (req, res) => {
+    res.sendFile(__dirname + "/../app/index.html");
+});
 module.exports = app;

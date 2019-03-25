@@ -1,7 +1,5 @@
-import * as express from 'express';
-import { Server } from 'http';
-
-
+import * as express from "express";
+import { Server } from "http";
 
 export class ApiServer {
     private app: express.Application;
@@ -11,7 +9,7 @@ export class ApiServer {
     }
 
     public start() {
-        this.app.use(require('./server/api-routes'));
+        this.app.use(require("./server/api-routes"));
         this.server = this.app.listen(9482);
     }
 
