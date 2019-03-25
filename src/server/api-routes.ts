@@ -50,7 +50,7 @@ app.get("/api/trip/:id/passages", (req, res) => {
                 location: result[1],
                 tripId: req.params.id
             }*/
-            const resp = result[0];
+            const resp: any = result[0];
             resp.location = result[1];
             resp.tripId = req.params.id;
             res.json(resp);
