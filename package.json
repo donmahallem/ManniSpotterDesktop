@@ -17,7 +17,8 @@
     "test:lint": "npm run lint",
     "test:build": "npm run build",
     "test:unit": "npm run test-ci",
-    "test:docs": "npm run docs"
+    "test:docs": "npm run docs",
+    "build:asar": "asar pack ./dist ./release/app.asar"
   },
   "author": "",
   "license": "ISC",
