@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+  - "8"
+  - "9"
+  - "10"
+env:
+  matrix:
+  - TEST_SUITE=lint
+  - TEST_SUITE=build
+  - TEST_SUITE=unit
+  - TEST_SUITE=docs
+matrix:
+  exclude:
+    - node_js: "8"
+      env: TEST_SUITE=lint
+    - node_js: "8"
+      env: TEST_SUITE=docs
+    - node_js: "9"
+      env: TEST_SUITE=lint
+    - node_js: "9"
+      env: TEST_SUITE=docs
+cache:
+  directories:
+  - node_modules
+  - "$(npm config get prefix)/node_modules"
+script:
+- npm run test:$TEST_SUITE
+after_success:
+- ./coveralls_upload.sh
