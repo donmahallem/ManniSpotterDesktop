@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "mocha",
     "build": "npm run build:pug && npm run build:typescript",
     "watch": "tsc -w",
     "start": "npm run build && electron ./dist/main.js",
@@ -21,8 +22,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/sinon": "^7.0.10",
+    "chai": "^4.2.0",
     "electron": "^4.1.1",
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
     "pug-cli": "^1.0.0-alpha6",
+    "ts-node": "^8.0.3",
     "tslint": "^5.14.0",
     "typedoc": "^0.14.2",
     "typescript": "^3.3.4000"
@@ -31,5 +39,31 @@
     "@donmahallem/trapeze-api-client": "^1.1.1",
     "@donmahallem/trapeze-api-types": "^0.1.1",
     "express": "^4.16.4"
+  },
+  "nyc": {
+    "include": [
+      "src/*.ts",
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "typings",
+      "src/**/*.spec.ts",
+      "**/*.d.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html",
+      "text-summary",
+      "lcov"
+    ],
+    "sourceMap": true,
+    "instrument": true,
+    "all": true
   }
 }
