@@ -27,3 +27,26 @@ script:
 - npm run test:$TEST_SUITE
 after_success:
 - ./coveralls_upload.sh
+jobs:
+  include:
+  - stage: Release Asar
+    node_js: '10'
+    script:
+    - npm run build
+    - git clone https://github.com/donmahallem/ngManniSpotter.git
+    - cp ./release/environment.ts ./ngManniSpotter/src/environments/environment.ts
+    - cp ./release/environment.ts ./ngManniSpotter/src/environments/environment.prod.ts
+    - cd ./ngManniSpotter
+    - npm install
+    - ng build --aot --prod --base-href=./
+    - cd ..
+    - cp -r ./ngManniSpotter/dist/manniweb ./dist/app
+    - npm run build:asar
+    #if: tag IS present
+    deploy:
+      provider: releases
+      skip_cleanup: true
+      api_key: $GITHUB_TOKEN
+      file: ./release/app.asar
+      on:
+        tags: true
