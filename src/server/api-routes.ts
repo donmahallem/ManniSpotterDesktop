@@ -83,7 +83,7 @@ app.get("/api/trip/:id/route", (req, res) => {
         });
 });
 app.get("/api/stop/:id/departures", (req, res) => {
-    trapezeApi.getStopInfo(req.params.id)
+    trapezeApi.getStopPassages(req.params.id)
         .then((result) => {
             res.json(result);
         })
