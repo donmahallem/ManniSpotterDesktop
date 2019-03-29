@@ -3,7 +3,7 @@ import * as path from "path";
 import { ApiServer } from "./api-server";
 
 let mainWindow: Electron.BrowserWindow;
-const apiServer: ApiServer = new ApiServer();
+const apiServer: ApiServer = new ApiServer(process.argv[2]);
 function createWindow() {
     apiServer.start();
     // Create the browser window.
