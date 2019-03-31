@@ -17,6 +17,10 @@ export class ApiServer {
         this.app.get("/*", (req, res) => {
             res.sendFile(__dirname + "/app/index.html");
         });
+        this.app.use((err, req, res, next) => {
+            // tslint:disable-next-line:no-console
+            console.error(err);
+        });
     }
 
     public start() {

@@ -1,8 +1,9 @@
 {
   "name": "mannispotterdesktop",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "./dist/main.js",
+  "private": false,
   "bin": {
     "mannispotter": "./bin/mannispoter"
   },
@@ -23,9 +24,30 @@
     "test:docs": "npm run docs",
     "build:asar": "asar pack ./dist ./release/app.asar"
   },
-  "author": "",
+  "files": [
+    "dist/*"
+  ],
   "mannispotter": "./bin/mannispotter",
-  "license": "ISC",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://donmahallem.github.io/ManniSpotterDesktop/",
+  "author": {
+    "name": "donmahallem",
+    "email": "donmahallem@users.noreply.github.com",
+    "url": "https://github.com/donmahallem"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/donmahallem/ManniSpotterDesktop/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/donmahallem/ManniSpotterDesktop.git"
+  },
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
