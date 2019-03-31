@@ -2,7 +2,10 @@
   "name": "mannispotterdesktop",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/main.js",
+  "bin": {
+    "mannispotter": "./bin/mannispoter"
+  },
   "scripts": {
     "test": "mocha",
     "build": "npm run build:pug && npm run build:typescript",
@@ -21,6 +24,7 @@
     "build:asar": "asar pack ./dist ./release/app.asar"
   },
   "author": "",
+  "mannispotter": "./bin/mannispotter",
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.1.7",
