@@ -1,11 +1,26 @@
+import { createTrapezeApiRoute } from "@donmahallem/trapeze-api-express-route";
 import * as express from "express";
 import { Server } from "http";
 
 export class ApiServer {
     private app: express.Application;
     private server: Server;
-    constructor() {
+    constructor(endpoint: string) {
         this.app = express();
+        this.app.use("/api", createTrapezeApiRoute(endpoint));
+        this.app.use("/api", (req, res, next) => {
+            res.status(404).json({
+                statusCode: 404,
+            });
+        });
+        this.app.use(express.static(__dirname + "/app"));
+        this.app.get("/*", (req, res) => {
+            res.sendFile(__dirname + "/app/index.html");
+        });
+        this.app.use((err, req, res, next) => {
+            // tslint:disable-next-line:no-console
+            console.error(err);
+        });
     }
 
     public start() {
@@ -14,6 +29,9 @@ export class ApiServer {
     }
 
     public stop() {
-        this.server.close(); // (err) => { });
+        this.server.close((err) => {
+            // tslint:disable-next-line:no-console
+            console.log("Server closed", err);
+        });
     }
 }
