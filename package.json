@@ -1,7 +1,7 @@
 {
-  "name": "mannispotterdesktop",
+  "name": "@donmahallem/mannispotter",
   "version": "1.0.0",
-  "description": "",
+  "description": "An electron app to be used with trapeze endpoints",
   "main": "./dist/main.js",
   "private": false,
   "bin": {

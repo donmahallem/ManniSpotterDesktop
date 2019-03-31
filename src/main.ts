@@ -3,7 +3,7 @@ import { ApiServer } from "./api-server";
 
 let mainWindow: Electron.BrowserWindow;
 const apiServer: ApiServer = new ApiServer(process.argv[2]);
-function createWindow() {
+const createWindow: () => void = (): void => {
     apiServer.start();
     // Create the browser window.
     mainWindow = new BrowserWindow({
@@ -28,7 +28,7 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = undefined;
     });
-}
+};
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
