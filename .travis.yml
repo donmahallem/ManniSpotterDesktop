@@ -31,7 +31,16 @@ jobs:
   include:
   - stage: npm release
     node_js: '10'
-    script: npm run build
+    script: 
+    - npm run build
+    - git clone https://github.com/donmahallem/ngManniSpotter.git
+    - cp ./release/environment.ts ./ngManniSpotter/src/environments/environment.ts
+    - cp ./release/environment.ts ./ngManniSpotter/src/environments/environment.prod.ts
+    - cd ./ngManniSpotter
+    - npm install
+    - ng build --aot --prod --base-href=./
+    - cd ..
+    - cp -r ./ngManniSpotter/dist/manniweb ./dist/app
     if: tag IS present
     deploy:
       provider: npm
