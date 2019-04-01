@@ -3,16 +3,16 @@ import * as express from "express";
 import * as helmet from "helmet";
 import { Server } from "http";
 export const api404Handler: express.RequestHandler = (req: express.Request,
-    res: express.Response,
-    next: express.NextFunction): void => {
+                                                      res: express.Response,
+                                                      next: express.NextFunction): void => {
     res.status(404).json({
         statusCode: 404,
     });
 };
 export const serverErrorHandler: express.ErrorRequestHandler = (err: any,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction) => {
+                                                                req: express.Request,
+                                                                res: express.Response,
+                                                                next: express.NextFunction) => {
     // tslint:disable-next-line:no-console
     console.error(err);
     res.status(500).json({ error: true });
@@ -20,16 +20,17 @@ export const serverErrorHandler: express.ErrorRequestHandler = (err: any,
 export class ApiServer {
     private app: express.Application;
     private server: Server;
-    constructor(endpoint: string) {
+    constructor(public readonly endpoint: string,
+                public readonly port: number) {
         this.app = express();
         this.app.use(helmet.contentSecurityPolicy({
             directives: {
                 defaultSrc: ["'self'"],
-                scriptSrc: ["'self'", "'unsafe-inline'"],
                 imgSrc: ["'self'",
                     "https://c.tile.openstreetmap.org/",
                     "https://b.tile.openstreetmap.org/",
                     "https://a.tile.openstreetmap.org/"],
+                scriptSrc: ["'self'", "'unsafe-inline'"],
                 styleSrc: ["'self'", "'unsafe-inline'"],
             },
         }));
@@ -44,7 +45,7 @@ export class ApiServer {
 
     public start() {
         this.app.use(require("./server/api-routes"));
-        this.server = this.app.listen(9482);
+        this.server = this.app.listen(this.port);
     }
 
     public stop() {

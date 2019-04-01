@@ -1,4 +1,4 @@
-import * as yargs from 'yargs';
+import * as yargs from "yargs";
 
 export interface IConfig {
     endpoint: URL;
@@ -7,31 +7,32 @@ export interface IConfig {
 }
 export type ArgsCallback = (IConfig) => void;
 export const parseArgs: (cb: ArgsCallback) => void = (cb: ArgsCallback): void => {
+    // tslint:disable-next-line:no-unused-expression
     yargs
-        .command('$0 [endpoint]', 'endpoint url to query', (ya: yargs.Argv<any>) => {
+        .command("$0 [endpoint]", "endpoint url to query", (ya: yargs.Argv<any>) => {
             return ya
-                .positional('endpoint', {
-                    describe: 'endpoint url',
+                .positional("endpoint", {
                     alias: "endpoint",
-                    example: "https://the-domain.com/"
+                    describe: "endpoint url",
+                    example: "https://the-domain.com/",
                 })
-                .option('port', {
-                    describe: 'port to bind on',
+                .option("port", {
+                    default: 9482,
+                    describe: "port to bind on",
                     type: "number",
-                    default: 9482
                 })
-                .option('dev', {
-                    type: "boolean",
-                    default: false,
+                .option("dev", {
                     boolean: true,
-                    describe: 'Enable dev mode'
+                    default: false,
+                    describe: "Enable dev mode",
+                    type: "boolean",
                 })
-                .coerce('endpoint', (value: string) => {
+                .coerce("endpoint", (value: string) => {
                     return new URL(value);
                 })
                 .check((argv: yargs.Arguments<any>, aliases: { [alias: string]: string }) => {
                     return true;
-                })
+                });
         }, (argv) => {
             cb(argv);
         })

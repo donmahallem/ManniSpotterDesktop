@@ -1,7 +1,4 @@
-import { app, BrowserWindow } from "electron";
-import { ApiServer } from "./api-server";
-import { parseArgs, ArgsCallback } from "./cli-commands";
 import { AppCallback } from "./app";
+import { parseArgs } from "./cli-commands";
 
-console.log(process.argv);
-const conf = parseArgs(AppCallback);
+parseArgs(AppCallback);
