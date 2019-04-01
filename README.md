@@ -1,6 +1,10 @@
 # Manni Spotter Desktop Client
 
 ## Setup 1 (requires node install)
+1. npm install -g @donmahallem/mannispotter
+2. run: mannispotter [DOMAIN AND PATH OF THE SERVICE]
+
+## Setup 2 (requires node install)
 1. Clone ngManniSpotter
 2. Install its dependencies
 3. run ng build --aot --prod --base-href=./
@@ -8,7 +12,7 @@
 5. run "npm run start -- [DOMAIN AND PATH OF THE SERVICE]"
 6. ... it should work
 
-## Setup 2 (requires no seperate node install)
+## Setup 3 (requires no seperate node install)
 1. Copy the latest app.asar file from the github releases page
 2. And proceed with it as described in https://electronjs.org/docs/tutorial/application-distribution
 3. Now run this app with the first parameter being the domain where to gether the data from
