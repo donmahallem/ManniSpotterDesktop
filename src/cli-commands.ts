@@ -22,7 +22,9 @@ export const parseArgs: (cb: ArgsCallback) => void = (cb: ArgsCallback): void =>
                 })
                 .option('dev', {
                     type: "boolean",
-                    default: false
+                    default: false,
+                    boolean: true,
+                    describe: 'Enable dev mode'
                 })
                 .coerce('endpoint', (value: string) => {
                     return new URL(value);

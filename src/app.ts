@@ -30,7 +30,7 @@ export class ManniApp {
         // mainWindow.loadFile(path.join(__dirname, "app/index.html"));
         this.mainWindow.loadURL("http://localhost:9482/index.html");
 
-        // Open the DevTools.
+        // tslint:disable-next-line:no-console
         if (this.config.dev === true) {
             this.mainWindow.webContents.openDevTools({
                 mode: "right",

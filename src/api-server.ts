@@ -3,16 +3,16 @@ import * as express from "express";
 import * as helmet from "helmet";
 import { Server } from "http";
 export const api404Handler: express.RequestHandler = (req: express.Request,
-                                                      res: express.Response,
-                                                      next: express.NextFunction): void => {
+    res: express.Response,
+    next: express.NextFunction): void => {
     res.status(404).json({
         statusCode: 404,
     });
 };
 export const serverErrorHandler: express.ErrorRequestHandler = (err: any,
-                                                                req: express.Request,
-                                                                res: express.Response,
-                                                                next: express.NextFunction) => {
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction) => {
     // tslint:disable-next-line:no-console
     console.error(err);
 };
@@ -24,6 +24,12 @@ export class ApiServer {
         this.app.use(helmet.contentSecurityPolicy({
             directives: {
                 defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "'unsafe-inline'"],
+                imgSrc: ["'self'",
+                    "https://c.tile.openstreetmap.org/",
+                    "https://b.tile.openstreetmap.org/",
+                    "https://a.tile.openstreetmap.org/"],
+                styleSrc: ["'self'", "'unsafe-inline'"],
             },
         }));
         this.app.use("/api", createTrapezeApiRoute(endpoint));

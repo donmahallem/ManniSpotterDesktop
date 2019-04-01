@@ -12,6 +12,7 @@
     "build": "npm run build:pug && npm run build:typescript",
     "watch": "tsc -w",
     "start": "npm run build && electron ./dist/main.js",
+    "start:dev": "npm run build && electron ./dist/main.js --dev true",
     "build:pug": "pug src --out ./dist",
     "build:typescript": "tsc",
     "test-ci": "nyc npm run test",
