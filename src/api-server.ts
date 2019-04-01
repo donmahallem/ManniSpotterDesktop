@@ -15,6 +15,7 @@ export const serverErrorHandler: express.ErrorRequestHandler = (err: any,
     next: express.NextFunction) => {
     // tslint:disable-next-line:no-console
     console.error(err);
+    res.status(500).json({ error: true });
 };
 export class ApiServer {
     private app: express.Application;
