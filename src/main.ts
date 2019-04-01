@@ -13,13 +13,15 @@ const createWindow: () => void = (): void => {
         minWidth: 640,
         width: 800,
     });
-
+    mainWindow.setMenu(undefined);
     // and load the index.html of the app.
     // mainWindow.loadFile(path.join(__dirname, "app/index.html"));
     mainWindow.loadURL("http://localhost:9482/index.html");
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools({
+        mode: "right",
+    });
 
     // Emitted when the window is closed.
     mainWindow.on("closed", () => {
