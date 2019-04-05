@@ -33,14 +33,7 @@ jobs:
     node_js: '10'
     script: 
     - npm run build
-    - git clone https://github.com/donmahallem/ngManniSpotter.git
-    - cp ./release/environment.ts ./ngManniSpotter/src/environments/environment.ts
-    - cp ./release/environment.ts ./ngManniSpotter/src/environments/environment.prod.ts
-    - cd ./ngManniSpotter
-    - npm install
-    - ng build --aot --prod --base-href=./
-    - cd ..
-    - cp -r ./ngManniSpotter/dist/manniweb ./dist/app
+    - cp -r ./node_modules/@donmahallem/trapeze-client-ng/dist/trapeze-client-ng ./dist/app
     if: tag IS present
     deploy:
       provider: npm
@@ -49,19 +42,12 @@ jobs:
       api_key: $npm_api_key
       on:
         tags: true
-        repo: donmahallem/ManniSpotterDesktop
+        repo: donmahallem/TrapezeClientElectron
   - stage: Release Asar
     node_js: '10'
     script:
     - npm run build
-    - git clone https://github.com/donmahallem/ngManniSpotter.git
-    - cp ./release/environment.ts ./ngManniSpotter/src/environments/environment.ts
-    - cp ./release/environment.ts ./ngManniSpotter/src/environments/environment.prod.ts
-    - cd ./ngManniSpotter
-    - npm install
-    - ng build --aot --prod --base-href=./
-    - cd ..
-    - cp -r ./ngManniSpotter/dist/manniweb ./dist/app
+    - cp -r ./node_modules/@donmahallem/trapeze-client-ng/dist/trapeze-client-ng ./dist/app
     - npm run build:asar
     #if: tag IS present
     deploy:
@@ -71,3 +57,4 @@ jobs:
       file: ./release/app.asar
       on:
         tags: true
+        repo: donmahallem/TrapezeClientElectron

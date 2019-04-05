@@ -1,11 +1,11 @@
 # Manni Spotter Desktop Client
 
 ## Setup 1 (requires node install)
-1. npm install -g @donmahallem/mannispotter
-2. run: mannispotter [DOMAIN AND PATH OF THE SERVICE]
+1. npm install -g @donmahallem/trapeze-client-electron
+2. run: trapeze-client [DOMAIN AND PATH OF THE SERVICE]
 
 ## Setup 2 (requires node install)
-1. Clone ngManniSpotter
+1. Clone TrapezeClientElectron
 2. Install its dependencies
 3. run ng build --aot --prod --base-href=./
 4. copy the data inside the dist/manniweb folder to the dist/app folder inside this project
