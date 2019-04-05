@@ -20,6 +20,7 @@ export const serverErrorHandler: express.ErrorRequestHandler = (err: any,
 export class ApiServer {
     private app: express.Application;
     private server: Server;
+    private readonly ngModulePath: string = "/../node_modules/@donmahallem/trapeze-client-ng/dist/trapeze-client-ng";
     constructor(public readonly endpoint: string,
                 public readonly port: number) {
         this.app = express();
@@ -36,9 +37,9 @@ export class ApiServer {
         }));
         this.app.use("/api", createTrapezeApiRoute(endpoint));
         this.app.use("/api", api404Handler);
-        this.app.use(express.static(__dirname + "/app"));
+        this.app.use(express.static(__dirname + this.ngModulePath));
         this.app.get("/*", (req, res) => {
-            res.sendFile(__dirname + "/app/index.html");
+            res.sendFile(__dirname + this.ngModulePath + "/index.html");
         });
         this.app.use(serverErrorHandler);
     }
