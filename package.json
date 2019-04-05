@@ -55,7 +55,7 @@
     "@types/sinon": "^7.0.11",
     "asar": "^1.0.0",
     "chai": "^4.2.0",
-    "electron": "^4.1.3",
+    "electron": "^4.1.4",
     "mocha": "^6.0.2",
     "nyc": "^13.3.0",
     "pug-cli": "^1.0.0-alpha6",
