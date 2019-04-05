@@ -3,10 +3,10 @@ import { ApiServer } from "./api-server";
 import { ArgsCallback, IConfig } from "./cli-commands";
 
 export const AppCallback: ArgsCallback = (config: IConfig) => {
-    const manniApp: ManniApp = new ManniApp(config);
-    manniApp.init();
+    const trapezeApp: TrapezeApp = new TrapezeApp(config);
+    trapezeApp.init();
 };
-export class ManniApp {
+export class TrapezeApp {
 
     private mainWindow: Electron.BrowserWindow;
     private apiServer: ApiServer;
@@ -61,4 +61,5 @@ export class ManniApp {
             // when you should delete the corresponding element.
             this.mainWindow = undefined;
         });
-    }}
+    }
+}
