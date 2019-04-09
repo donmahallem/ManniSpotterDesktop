@@ -26,7 +26,8 @@
     "build:asar": "asar pack ./dist ./release/app.asar"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "bin/*"
   ],
   "trapeze-client": "./bin/trapeze-client",
   "engines": {
