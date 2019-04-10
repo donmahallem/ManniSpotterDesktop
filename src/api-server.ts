@@ -28,11 +28,16 @@ export class ApiServer {
         this.app = express();
         this.app.use(helmet.contentSecurityPolicy({
             directives: {
+                connectSrc: ["'self'",
+                    "https://c.tile.openstreetmap.org",
+                    "https://b.tile.openstreetmap.org",
+                    "https://a.tile.openstreetmap.org"],
                 defaultSrc: ["'self'"],
                 imgSrc: ["'self'",
-                    "https://c.tile.openstreetmap.org/",
-                    "https://b.tile.openstreetmap.org/",
-                    "https://a.tile.openstreetmap.org/"],
+                    "https://c.tile.openstreetmap.org",
+                    "https://b.tile.openstreetmap.org",
+                    "https://a.tile.openstreetmap.org",
+                    "data:"],
                 scriptSrc: ["'self'", "'unsafe-inline'"],
                 styleSrc: ["'self'", "'unsafe-inline'"],
             },
