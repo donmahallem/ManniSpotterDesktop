@@ -47,7 +47,6 @@ export class ApiServer {
     }
 
     public start() {
-        this.app.use(require("./server/api-routes"));
         this.server = this.app.listen(this.port);
     }
 
