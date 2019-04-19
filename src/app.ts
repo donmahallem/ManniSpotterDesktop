@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 import { ApiServer } from "./api-server";
 import { ArgsCallback, IConfig } from "./cli-commands";
 
@@ -34,13 +34,18 @@ export class TrapezeApp {
     private createWindow(): void {
         this.apiServer.start();
         // Create the browser window.
-        this.mainWindow = new BrowserWindow({
+
+        const browserConfig: BrowserWindowConstructorOptions = {
             height: 600,
             icon: __dirname + "/../icon.png",
             minHeight: 480,
             minWidth: 640,
+            webPreferences: {
+                nodeIntegration: false,
+            },
             width: 800,
-        });
+        };
+        this.mainWindow = new BrowserWindow(browserConfig);
         // tslint:disable-next-line:no-null-keyword
         this.mainWindow.setMenu(null);
         // and load the index.html of the app.
