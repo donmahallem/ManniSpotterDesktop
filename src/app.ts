@@ -41,6 +41,8 @@ export class TrapezeApp {
             minHeight: 480,
             minWidth: 640,
             webPreferences: {
+                allowRunningInsecureContent: true,
+                javascript: true,
                 nodeIntegration: false,
             },
             width: 800,
