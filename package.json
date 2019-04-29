@@ -1,6 +1,6 @@
 {
   "name": "@donmahallem/trapeze-client-electron",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "An electron app to be used with trapeze endpoints",
   "main": "./dist/main.js",
   "private": false,
