@@ -51,7 +51,7 @@
     "url": "https://github.com/donmahallem/TrapezeClientElectron.git"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.7",
+    "@types/chai": "^4.2.0",
     "@types/mocha": "^5.2.7",
     "@types/sinon": "^7.0.13",
     "asar": "^2.0.1",
