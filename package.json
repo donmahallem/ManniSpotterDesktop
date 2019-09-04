@@ -71,7 +71,7 @@
     "electron": "^5.0.8",
     "express": "^4.17.1",
     "helmet": "^3.21.0",
-    "yargs": "^13.3.0"
+    "yargs": "^14.0.0"
   },
   "nyc": {
     "include": [
