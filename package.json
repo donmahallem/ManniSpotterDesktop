@@ -59,7 +59,7 @@
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
     "pug-cli": "^1.0.0-alpha6",
-    "ts-node": "^8.4.0",
+    "ts-node": "^8.4.1",
     "tslint": "^5.20.0",
     "typedoc": "^0.15.0",
     "typescript": "^3.6.3"
