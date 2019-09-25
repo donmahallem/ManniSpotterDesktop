@@ -8,6 +8,7 @@
 
 import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 import { ApiServer } from "./api-server";
+import * as crypto from "crypto";
 import { ArgsCallback, IConfig } from "./cli-commands";
 
 export const AppCallback: ArgsCallback = (config: IConfig) => {
@@ -20,6 +21,10 @@ export class TrapezeApp {
     private apiServer: ApiServer;
     public constructor(private readonly config: IConfig) {
         this.apiServer = new ApiServer(config.endpoint.href, config.port);
+    }
+
+    public createSecureToken(): string {
+        return crypto.randomBytes(64).toString('hex');
     }
 
     public init(): void {
