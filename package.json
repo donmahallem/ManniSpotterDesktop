@@ -51,27 +51,27 @@
     "url": "https://github.com/donmahallem/TrapezeClientElectron.git"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.3",
-    "@types/mocha": "^5.2.7",
-    "@types/sinon": "^7.0.13",
-    "asar": "^2.0.1",
-    "chai": "^4.2.0",
-    "mocha": "^6.2.0",
-    "nyc": "^14.1.1",
-    "pug-cli": "^1.0.0-alpha6",
-    "ts-node": "^8.4.1",
-    "tslint": "^5.20.0",
-    "typedoc": "^0.15.0",
-    "typescript": "^3.6.3"
+    "@types/chai": "~4.2.3",
+    "@types/mocha": "~5.2.7",
+    "@types/sinon": "~7.0.13",
+    "asar": "~2.0.1",
+    "chai": "~4.2.0",
+    "mocha": "~6.2.0",
+    "nyc": "~14.1.1",
+    "pug-cli": "~1.0.0-alpha6",
+    "ts-node": "~8.4.1",
+    "tslint": "~5.20.0",
+    "typedoc": "~0.15.0",
+    "typescript": "~3.6.3"
   },
   "dependencies": {
-    "@donmahallem/trapeze-api-express-route": "^1.7.6",
-    "@donmahallem/trapeze-api-types": "^1.4.1",
-    "@donmahallem/trapeze-client-ng": "^2.1.1",
-    "electron": "^6.0.10",
-    "express": "^4.17.1",
-    "helmet": "^3.21.1",
-    "yargs": "^14.0.0"
+    "@donmahallem/trapeze-api-express-route": "~1.7.6",
+    "@donmahallem/trapeze-api-types": "~1.4.1",
+    "@donmahallem/trapeze-client-ng": "~2.1.1",
+    "electron": "~6.0.10",
+    "express": "~4.17.1",
+    "helmet": "~3.21.1",
+    "yargs": "~14.0.0"
   },
   "nyc": {
     "include": [
