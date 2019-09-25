@@ -19,10 +19,15 @@ export class TrapezeApp {
 
     private mainWindow: Electron.BrowserWindow;
     private apiServer: ApiServer;
+    private secureToken: string;
     public constructor(private readonly config: IConfig) {
         this.apiServer = new ApiServer(config.endpoint.href, config.port);
+        this.secureToken = this.createSecureToken();
     }
 
+    /**
+     * creates a random string
+     */
     public createSecureToken(): string {
         return crypto.randomBytes(64).toString('hex');
     }
