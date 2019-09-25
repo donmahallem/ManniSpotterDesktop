@@ -1,3 +1,7 @@
+/*!
+ * Source https://github.com/donmahallem/TrapezeApiExpressRoute
+ */
+
 import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 import { ApiServer } from "./api-server";
 import { ArgsCallback, IConfig } from "./cli-commands";
@@ -33,7 +37,7 @@ export class TrapezeApp {
 
     private createWindow(): void {
         this.apiServer.start();
-        // Create the browser window.
+        // create the browser window.
 
         const browserConfig: BrowserWindowConstructorOptions = {
             height: 600,
@@ -56,15 +60,15 @@ export class TrapezeApp {
         this.mainWindow.loadURL("http://localhost:" + this.config.port + "/index.html");
 
         // tslint:disable-next-line:no-console
-        if (this.config.dev === true) {
+        if (this.config.dev) {
             this.mainWindow.webContents.openDevTools({
                 mode: "right",
             });
         }
 
-        // Emitted when the window is closed.
+        // emitted when the window is closed.
         this.mainWindow.on("closed", () => {
-            // Dereference the window object, usually you would store windows
+            // dereference the window object, usually you would store windows
             // in an array if your app supports multi windows, this is the time
             // when you should delete the corresponding element.
             this.mainWindow = undefined;
