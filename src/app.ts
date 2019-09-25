@@ -40,6 +40,7 @@ export class TrapezeApp {
             icon: __dirname + "/../icon.png",
             minHeight: 480,
             minWidth: 640,
+            title: "TrapezeClient",
             webPreferences: {
                 allowRunningInsecureContent: true,
                 javascript: true,
