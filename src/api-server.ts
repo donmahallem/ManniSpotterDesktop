@@ -11,6 +11,7 @@ import * as express from "express";
 import * as helmet from "helmet";
 import { Server } from "http";
 import { resolve as pathResolve } from "path";
+import { IApiServerConfig } from "./api-server-config";
 export const api404Handler: express.RequestHandler = (req: express.Request,
                                                       res: express.Response,
                                                       next: express.NextFunction): void => {
@@ -31,8 +32,7 @@ export class ApiServer {
     private server: Server;
     private readonly ngModulePath: string = pathResolve(__dirname +
         "./../node_modules/@donmahallem/trapeze-client-ng/dist/trapeze-client-ng");
-    constructor(public readonly endpoint: string,
-                public readonly port: number) {
+    constructor(public readonly config: IApiServerConfig) {
         this.app = express();
         this.app.use(helmet.contentSecurityPolicy({
             directives: {
@@ -50,7 +50,8 @@ export class ApiServer {
                 styleSrc: ["'self'", "'unsafe-inline'"],
             },
         }));
-        this.app.use("/api", createTrapezeApiRoute(endpoint));
+        this.app.use("/api", this.createAuthMiddleware(this.config.secret));
+        this.app.use("/api", createTrapezeApiRoute(this.config.endpoint));
         this.app.use("/api", api404Handler);
         this.app.use(express.static(this.ngModulePath));
         this.app.get("/*", (req, res) => {
@@ -58,9 +59,26 @@ export class ApiServer {
         });
         this.app.use(serverErrorHandler);
     }
-
+    public createAuthMiddleware(secret: string): express.RequestHandler {
+        return (req: express.Request,
+                res: express.Response,
+                next: express.NextFunction): express.RequestHandler => {
+            if (req.headers.authorization) {
+                const splits: string[] = req.headers.authorization.split(" ");
+                if (splits.length !== 2) {
+                    next(new Error("Bearer token request expected"));
+                    return;
+                }
+                if (splits[0] === "Bearer" && splits[1] === this.config.secret) {
+                    next();
+                    return;
+                }
+            }
+            next(new Error("No Authorization Header provided"));
+        };
+    }
     public start() {
-        this.server = this.app.listen(this.port);
+        this.server = this.app.listen(this.config.port);
     }
 
     public stop() {

@@ -6,9 +6,9 @@
  * Source https://github.com/donmahallem/TrapezeApiExpressRoute
  */
 
+import * as crypto from "crypto";
 import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 import { ApiServer } from "./api-server";
-import * as crypto from "crypto";
 import { ArgsCallback, IConfig } from "./cli-commands";
 
 export const AppCallback: ArgsCallback = (config: IConfig) => {
@@ -21,15 +21,19 @@ export class TrapezeApp {
     private apiServer: ApiServer;
     private secureToken: string;
     public constructor(private readonly config: IConfig) {
-        this.apiServer = new ApiServer(config.endpoint.href, config.port);
         this.secureToken = this.createSecureToken();
+        this.apiServer = new ApiServer({
+            endpoint: config.endpoint.href,
+            port: config.port,
+            secret: this.secureToken,
+        });
     }
 
     /**
      * creates a random string
      */
     public createSecureToken(): string {
-        return crypto.randomBytes(64).toString('hex');
+        return crypto.randomBytes(64).toString("hex");
     }
 
     public init(): void {
@@ -47,6 +51,19 @@ export class TrapezeApp {
                 this.createWindow();
             }
         });
+    }
+
+    public setupNetworkInterceptors(session: Electron.Session): void {
+        const filter: Electron.OnBeforeSendHeadersFilter = {
+            urls: [
+                "*://localhost/*",
+            ],
+        };
+        session.webRequest
+            .onBeforeSendHeaders(filter, (details: Electron.OnBeforeSendHeadersDetails, callback) => {
+                details.requestHeaders.Authorization = "Bearer " + this.secureToken;
+                callback({ cancel: false, requestHeaders: details.requestHeaders });
+            });
     }
 
     private createWindow(): void {
@@ -69,8 +86,6 @@ export class TrapezeApp {
         this.mainWindow = new BrowserWindow(browserConfig);
         // tslint:disable-next-line:no-null-keyword
         this.mainWindow.setMenu(null);
-        // and load the index.html of the app.
-        // mainWindow.loadFile(path.join(__dirname, "app/index.html"));
         this.mainWindow.loadURL("http://localhost:" + this.config.port + "/index.html");
 
         // tslint:disable-next-line:no-console
@@ -87,5 +102,7 @@ export class TrapezeApp {
             // when you should delete the corresponding element.
             this.mainWindow = undefined;
         });
+        // register Token Interceptor
+        this.setupNetworkInterceptors(this.mainWindow.webContents.session);
     }
 }
