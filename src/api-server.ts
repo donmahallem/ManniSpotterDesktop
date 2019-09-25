@@ -13,16 +13,16 @@ import { Server } from "http";
 import { resolve as pathResolve } from "path";
 import { IApiServerConfig } from "./api-server-config";
 export const api404Handler: express.RequestHandler = (req: express.Request,
-                                                      res: express.Response,
-                                                      next: express.NextFunction): void => {
+    res: express.Response,
+    next: express.NextFunction): void => {
     res.status(404).json({
         statusCode: 404,
     });
 };
 export const serverErrorHandler: express.ErrorRequestHandler = (err: any,
-                                                                req: express.Request,
-                                                                res: express.Response,
-                                                                next: express.NextFunction) => {
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction) => {
     // tslint:disable-next-line:no-console
     console.error(err);
     res.status(500).json({ error: true });
@@ -34,6 +34,7 @@ export class ApiServer {
         "./../node_modules/@donmahallem/trapeze-client-ng/dist/trapeze-client-ng");
     constructor(public readonly config: IApiServerConfig) {
         this.app = express();
+        this.app.use(this.createAuthMiddleware(this.config.secret));
         this.app.use(helmet.contentSecurityPolicy({
             directives: {
                 connectSrc: ["'self'",
@@ -50,7 +51,6 @@ export class ApiServer {
                 styleSrc: ["'self'", "'unsafe-inline'"],
             },
         }));
-        this.app.use("/api", this.createAuthMiddleware(this.config.secret));
         this.app.use("/api", createTrapezeApiRoute(this.config.endpoint));
         this.app.use("/api", api404Handler);
         this.app.use(express.static(this.ngModulePath));
@@ -61,8 +61,8 @@ export class ApiServer {
     }
     public createAuthMiddleware(secret: string): express.RequestHandler {
         return (req: express.Request,
-                res: express.Response,
-                next: express.NextFunction): express.RequestHandler => {
+            res: express.Response,
+            next: express.NextFunction): express.RequestHandler => {
             if (req.headers.authorization) {
                 const splits: string[] = req.headers.authorization.split(" ");
                 if (splits.length !== 2) {
