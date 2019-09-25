@@ -1,3 +1,7 @@
+/*!
+ * Source https://github.com/donmahallem/TrapezeApiExpressRoute
+ */
+
 import * as yargs from "yargs";
 
 export interface IConfig {
@@ -9,8 +13,8 @@ export type ArgsCallback = (IConfig) => void;
 export const parseArgs: (cb: ArgsCallback) => void = (cb: ArgsCallback): void => {
     // tslint:disable-next-line:no-unused-expression
     yargs
-        .command("$0 [endpoint]", "endpoint url to query", (ya: yargs.Argv<any>) => {
-            return ya
+        .command("$0 [endpoint]", "endpoint url to query", (ya: yargs.Argv<any>) =>
+            ya
                 .positional("endpoint", {
                     alias: "endpoint",
                     describe: "endpoint url",
@@ -27,13 +31,10 @@ export const parseArgs: (cb: ArgsCallback) => void = (cb: ArgsCallback): void =>
                     describe: "Enable dev mode",
                     type: "boolean",
                 })
-                .coerce("endpoint", (value: string) => {
-                    return new URL(value);
-                })
-                .check((argv: yargs.Arguments<any>, aliases: { [alias: string]: string }) => {
-                    return true;
-                });
-        }, (argv) => {
+                .coerce("endpoint", (value: string) =>
+                    new URL(value))
+                .check((argv: yargs.Arguments<any>, aliases: { [alias: string]: string }) =>
+                    true), (argv) => {
             cb(argv);
         })
         .argv;

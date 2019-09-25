@@ -15,4 +15,4 @@
 ## Setup 3 (requires no seperate node install)
 1. Copy the latest app.asar file from the github releases page
 2. And proceed with it as described in https://electronjs.org/docs/tutorial/application-distribution
-3. Now run this app with the first parameter being the domain where to gether the data from
+3. Now run this app with the first parameter being the domain where to gather the data from
