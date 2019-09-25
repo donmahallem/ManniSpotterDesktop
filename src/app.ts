@@ -61,7 +61,8 @@ export class TrapezeApp {
         };
         session.webRequest
             .onBeforeSendHeaders(filter, (details: Electron.OnBeforeSendHeadersDetails, callback) => {
-                details.requestHeaders.Authorization = "Bearer " + this.secureToken;
+                // tslint:disable-next-line:no-string-literal
+                details.requestHeaders["Authorization"] = "Bearer " + this.secureToken;
                 callback({ cancel: false, requestHeaders: details.requestHeaders });
             });
     }
