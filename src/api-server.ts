@@ -8,20 +8,13 @@ import * as helmet from "helmet";
 import { Server } from "http";
 import { resolve as pathResolve } from "path";
 import { IApiServerConfig } from "./api-server-config";
+import { createErrorRequestHandler } from "./api-server/server-error-request-handler";
 export const api404Handler: express.RequestHandler = (req: express.Request,
-                                                      res: express.Response,
-                                                      next: express.NextFunction): void => {
+    res: express.Response,
+    next: express.NextFunction): void => {
     res.status(404).json({
         statusCode: 404,
     });
-};
-export const serverErrorHandler: express.ErrorRequestHandler = (err: any,
-                                                                req: express.Request,
-                                                                res: express.Response,
-                                                                next: express.NextFunction) => {
-    // tslint:disable-next-line:no-console
-    console.error(err);
-    res.status(500).json({ error: true });
 };
 /**
  * Api Server
@@ -60,7 +53,7 @@ export class ApiServer {
         this.app.get("/*", (req, res) => {
             res.status(404).sendFile(this.ngModulePath + "/index.html");
         });
-        this.app.use(serverErrorHandler);
+        this.app.use(createErrorRequestHandler());
     }
     /**
      * Checks the Auth Header for the Api Token
@@ -68,8 +61,8 @@ export class ApiServer {
      */
     public createAuthMiddleware(secret: string): express.RequestHandler {
         return (req: express.Request,
-                res: express.Response,
-                next: express.NextFunction): express.RequestHandler => {
+            res: express.Response,
+            next: express.NextFunction): express.RequestHandler => {
             // checks if the Authorization Header is set
             if (req.headers.authorization) {
                 const splits: string[] = req.headers.authorization.split(" ");
