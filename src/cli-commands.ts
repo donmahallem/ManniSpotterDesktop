@@ -2,10 +2,6 @@
  * Source https://github.com/donmahallem/TrapezeClientElectron
  */
 
-/*!
- * Source https://github.com/donmahallem/TrapezeApiExpressRoute
- */
-
 import * as yargs from "yargs";
 
 export interface IConfig {
@@ -39,7 +35,7 @@ export const parseArgs: (cb: ArgsCallback) => void = (cb: ArgsCallback): void =>
                     new URL(value))
                 .check((argv: yargs.Arguments<any>, aliases: { [alias: string]: string }) =>
                     true), (argv) => {
-            cb(argv);
-        })
+                        cb(argv);
+                    })
         .argv;
 };
