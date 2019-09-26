@@ -13,25 +13,32 @@ import { Server } from "http";
 import { resolve as pathResolve } from "path";
 import { IApiServerConfig } from "./api-server-config";
 export const api404Handler: express.RequestHandler = (req: express.Request,
-    res: express.Response,
-    next: express.NextFunction): void => {
+                                                      res: express.Response,
+                                                      next: express.NextFunction): void => {
     res.status(404).json({
         statusCode: 404,
     });
 };
 export const serverErrorHandler: express.ErrorRequestHandler = (err: any,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction) => {
+                                                                req: express.Request,
+                                                                res: express.Response,
+                                                                next: express.NextFunction) => {
     // tslint:disable-next-line:no-console
     console.error(err);
     res.status(500).json({ error: true });
 };
+/**
+ * Api Server
+ */
 export class ApiServer {
     private app: express.Application;
     private server: Server;
     private readonly ngModulePath: string = pathResolve(__dirname +
         "./../node_modules/@donmahallem/trapeze-client-ng/dist/trapeze-client-ng");
+    /**
+     * Api Server for the Trapeze Api Wrapper
+     * @param config Config to be used to start the server
+     */
     constructor(public readonly config: IApiServerConfig) {
         this.app = express();
         this.app.use(this.createAuthMiddleware(this.config.secret));
@@ -61,8 +68,8 @@ export class ApiServer {
     }
     public createAuthMiddleware(secret: string): express.RequestHandler {
         return (req: express.Request,
-            res: express.Response,
-            next: express.NextFunction): express.RequestHandler => {
+                res: express.Response,
+                next: express.NextFunction): express.RequestHandler => {
             if (req.headers.authorization) {
                 const splits: string[] = req.headers.authorization.split(" ");
                 if (splits.length !== 2) {
@@ -77,10 +84,17 @@ export class ApiServer {
             next(new Error("No Authorization Header provided"));
         };
     }
+
+    /**
+     * Starts the app server
+     */
     public start() {
         this.server = this.app.listen(this.config.port);
     }
 
+    /**
+     * Stops the app server
+     */
     public stop() {
         this.server.close((err) => {
             // tslint:disable-next-line:no-console
