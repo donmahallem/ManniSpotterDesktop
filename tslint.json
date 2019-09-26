@@ -60,7 +60,7 @@
         "file-header": [
             true,
             {
-                "match": "Source https://github.com/donmahallem/TrapezeClientElectron",
+                "match": "Source https://github.com/donmahallem/TrapezeClientElectron*",
                 "allow-single-line-comments": true,
                 "default": "Source https://github.com/donmahallem/TrapezeClientElectron",
                 "enforce-trailing-newline": false

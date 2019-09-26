@@ -2,10 +2,6 @@
  * Source https://github.com/donmahallem/TrapezeClientElectron
  */
 
-/*!
- * Source https://github.com/donmahallem/TrapezeApiExpressRoute
- */
-
 import * as crypto from "crypto";
 import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 import { ApiServer } from "./api-server";

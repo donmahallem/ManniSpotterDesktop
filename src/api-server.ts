@@ -2,10 +2,6 @@
  * Source https://github.com/donmahallem/TrapezeClientElectron
  */
 
-/*!
- * Source https://github.com/donmahallem/TrapezeApiExpressRoute
- */
-
 import { createTrapezeApiRoute } from "@donmahallem/trapeze-api-express-route";
 import * as express from "express";
 import * as helmet from "helmet";
@@ -13,16 +9,16 @@ import { Server } from "http";
 import { resolve as pathResolve } from "path";
 import { IApiServerConfig } from "./api-server-config";
 export const api404Handler: express.RequestHandler = (req: express.Request,
-    res: express.Response,
-    next: express.NextFunction): void => {
+                                                      res: express.Response,
+                                                      next: express.NextFunction): void => {
     res.status(404).json({
         statusCode: 404,
     });
 };
 export const serverErrorHandler: express.ErrorRequestHandler = (err: any,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction) => {
+                                                                req: express.Request,
+                                                                res: express.Response,
+                                                                next: express.NextFunction) => {
     // tslint:disable-next-line:no-console
     console.error(err);
     res.status(500).json({ error: true });
@@ -72,9 +68,9 @@ export class ApiServer {
      */
     public createAuthMiddleware(secret: string): express.RequestHandler {
         return (req: express.Request,
-            res: express.Response,
-            next: express.NextFunction): express.RequestHandler => {
-            // Checks if the Authorization Header is set
+                res: express.Response,
+                next: express.NextFunction): express.RequestHandler => {
+            // checks if the Authorization Header is set
             if (req.headers.authorization) {
                 const splits: string[] = req.headers.authorization.split(" ");
                 if (splits.length !== 2) {
