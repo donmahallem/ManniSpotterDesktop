@@ -87,7 +87,6 @@ export class TrapezeApp {
         this.mainWindow.setMenu(null);
         this.mainWindow.loadURL("http://localhost:" + this.config.port + "/index.html");
 
-        // tslint:disable-next-line:no-console
         if (this.config.dev) {
             this.mainWindow.webContents.openDevTools({
                 mode: "right",
