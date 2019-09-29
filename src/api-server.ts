@@ -22,6 +22,7 @@ export const api404Handler: express.RequestHandler = (req: express.Request,
 export class ApiServer {
     private app: express.Application;
     private server: Server;
+    private isRunning: boolean = false;
     private readonly ngModulePath: string = pathResolve(__dirname +
         "./../node_modules/@donmahallem/trapeze-client-ng/dist/trapeze-client-ng");
     /**
@@ -82,8 +83,20 @@ export class ApiServer {
     /**
      * Starts the app server
      */
-    public start() {
-        this.server = this.app.listen(this.config.port);
+    public start(): Promise<void> {
+        if (this.isRunning) {
+            return Promise.resolve();
+        }
+        return new Promise((resolve, reject) => {
+            this.server = this.app.listen(this.config.port, (...args: any[]) => {
+                if (args.length > 0) {
+                    reject(args[0]);
+                } else {
+                    this.isRunning = true;
+                    resolve();
+                }
+            });
+        });
     }
 
     /**

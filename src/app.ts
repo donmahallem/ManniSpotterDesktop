@@ -64,7 +64,7 @@ export class TrapezeApp {
     }
 
     private createWindow(): void {
-        this.apiServer.start();
+        this.apiServer.start()
         // create the browser window.
 
         const browserConfig: BrowserWindowConstructorOptions = {
