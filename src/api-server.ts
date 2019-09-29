@@ -10,8 +10,8 @@ import { resolve as pathResolve } from "path";
 import { IApiServerConfig } from "./api-server-config";
 import { createErrorRequestHandler } from "./api-server/server-error-request-handler";
 export const api404Handler: express.RequestHandler = (req: express.Request,
-    res: express.Response,
-    next: express.NextFunction): void => {
+                                                      res: express.Response,
+                                                      next: express.NextFunction): void => {
     res.status(404).json({
         statusCode: 404,
     });
@@ -62,8 +62,8 @@ export class ApiServer {
      */
     public createAuthMiddleware(secret: string): express.RequestHandler {
         return (req: express.Request,
-            res: express.Response,
-            next: express.NextFunction): express.RequestHandler => {
+                res: express.Response,
+                next: express.NextFunction): express.RequestHandler => {
             // checks if the Authorization Header is set
             if (req.headers.authorization) {
                 const splits: string[] = req.headers.authorization.split(" ");

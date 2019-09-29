@@ -7,15 +7,24 @@ import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 import { ApiServer } from "./api-server";
 import { ArgsCallback, IConfig } from "./cli-commands";
 
-export const AppCallback: ArgsCallback = (config: IConfig) => {
-    const trapezeApp: TrapezeApp = new TrapezeApp(config);
-    trapezeApp.init();
-};
 export class TrapezeApp {
 
+    /**
+     * Main Window
+     */
     private mainWindow: Electron.BrowserWindow;
+    /**
+     * Api Proxy Server
+     */
     private apiServer: ApiServer;
+    /**
+     * Secure Token to be used for communication between the client and the local api
+     */
     private secureToken: string;
+    /**
+     * Trapeze Client APP
+     * @param config Config to be setup
+     */
     public constructor(private readonly config: IConfig) {
         this.secureToken = this.createSecureToken();
         this.apiServer = new ApiServer({
@@ -32,21 +41,29 @@ export class TrapezeApp {
         return crypto.randomBytes(64).toString("hex");
     }
 
-    public init(): void {
-        app.on("ready", this.createWindow.bind(this));
+    /**
+     * Inits the client and starts up the app
+     */
+    public init(): Promise<void> {
+        return this.apiServer
+            .start()
+            .then(() => {
 
-        app.on("window-all-closed", () => {
-            if (process.platform !== "darwin") {
-                app.quit();
-                this.apiServer.stop();
-            }
-        });
+                app.on("ready", this.createWindow.bind(this));
 
-        app.on("activate", () => {
-            if (this.mainWindow === null) {
-                this.createWindow();
-            }
-        });
+                app.on("window-all-closed", () => {
+                    if (process.platform !== "darwin") {
+                        app.quit();
+                        this.apiServer.stop();
+                    }
+                });
+
+                app.on("activate", () => {
+                    if (this.mainWindow === null) {
+                        this.createWindow();
+                    }
+                });
+            });
     }
 
     public setupNetworkInterceptors(session: Electron.Session): void {
@@ -64,7 +81,6 @@ export class TrapezeApp {
     }
 
     private createWindow(): void {
-        this.apiServer.start()
         // create the browser window.
 
         const browserConfig: BrowserWindowConstructorOptions = {
