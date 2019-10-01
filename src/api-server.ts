@@ -8,6 +8,7 @@ import * as helmet from "helmet";
 import { Server } from "http";
 import { resolve as pathResolve } from "path";
 import { IApiServerConfig } from "./api-server-config";
+import { createErrorRequestHandler } from "./api-server/server-error-request-handler";
 export const api404Handler: express.RequestHandler = (req: express.Request,
                                                       res: express.Response,
                                                       next: express.NextFunction): void => {
@@ -15,20 +16,13 @@ export const api404Handler: express.RequestHandler = (req: express.Request,
         statusCode: 404,
     });
 };
-export const serverErrorHandler: express.ErrorRequestHandler = (err: any,
-                                                                req: express.Request,
-                                                                res: express.Response,
-                                                                next: express.NextFunction) => {
-    // tslint:disable-next-line:no-console
-    console.error(err);
-    res.status(500).json({ error: true });
-};
 /**
  * Api Server
  */
 export class ApiServer {
     private app: express.Application;
     private server: Server;
+    private isRunning: boolean = false;
     private readonly ngModulePath: string = pathResolve(__dirname +
         "./../node_modules/@donmahallem/trapeze-client-ng/dist/trapeze-client-ng");
     /**
@@ -60,7 +54,7 @@ export class ApiServer {
         this.app.get("/*", (req, res) => {
             res.status(404).sendFile(this.ngModulePath + "/index.html");
         });
-        this.app.use(serverErrorHandler);
+        this.app.use(createErrorRequestHandler());
     }
     /**
      * Checks the Auth Header for the Api Token
@@ -89,8 +83,20 @@ export class ApiServer {
     /**
      * Starts the app server
      */
-    public start() {
-        this.server = this.app.listen(this.config.port);
+    public start(): Promise<void> {
+        if (this.isRunning) {
+            return Promise.resolve();
+        }
+        return new Promise((resolve, reject) => {
+            this.server = this.app.listen(this.config.port, (...args: any[]) => {
+                if (args.length > 0) {
+                    reject(args[0]);
+                } else {
+                    this.isRunning = true;
+                    resolve();
+                }
+            });
+        });
     }
 
     /**
