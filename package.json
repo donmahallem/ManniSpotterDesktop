@@ -68,7 +68,7 @@
     "@donmahallem/trapeze-api-express-route": "~1.8.0",
     "@donmahallem/trapeze-api-types": "~1.5.0",
     "@donmahallem/trapeze-client-ng": "~2.3.0",
-    "electron": "~6.0.12",
+    "electron": "~7.0.1",
     "express": "~4.17.1",
     "helmet": "~3.21.2",
     "yargs": "~14.2.0"
