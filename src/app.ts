@@ -67,13 +67,13 @@ export class TrapezeApp {
     }
 
     public setupNetworkInterceptors(session: Electron.Session): void {
-        const filter: Electron.OnBeforeSendHeadersFilter = {
+        const filter: Electron.Filter = {
             urls: [
                 "*://localhost/*",
             ],
         };
         session.webRequest
-            .onBeforeSendHeaders(filter, (details: Electron.OnBeforeSendHeadersDetails, callback) => {
+            .onBeforeSendHeaders(filter, (details: Electron.OnBeforeSendHeadersListenerDetails, callback) => {
                 // tslint:disable-next-line:no-string-literal
                 details.requestHeaders["Authorization"] = "Bearer " + this.secureToken;
                 callback({ cancel: false, requestHeaders: details.requestHeaders });
