@@ -1,6 +1,6 @@
 {
   "name": "@donmahallem/trapeze-client-electron",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "An electron app to be used with trapeze endpoints",
   "main": "./dist/main.js",
   "private": false,
@@ -67,7 +67,7 @@
   "dependencies": {
     "@donmahallem/trapeze-api-express-route": "~1.8.3",
     "@donmahallem/trapeze-api-types": "~1.5.1",
-    "@donmahallem/trapeze-client-ng": "~2.3.0",
+    "@donmahallem/trapeze-client-ng": "~2.3.1",
     "electron": "~7.1.2",
     "express": "~4.17.1",
     "helmet": "~3.21.2",
