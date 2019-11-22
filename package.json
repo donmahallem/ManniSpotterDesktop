@@ -67,7 +67,7 @@
   "dependencies": {
     "@donmahallem/trapeze-api-express-route": "~1.8.3",
     "@donmahallem/trapeze-api-types": "~1.5.1",
-    "@donmahallem/trapeze-client-ng": "~2.3.0",
+    "@donmahallem/trapeze-client-ng": "~2.3.1",
     "electron": "~7.1.2",
     "express": "~4.17.1",
     "helmet": "~3.21.2",
