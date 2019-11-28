@@ -100,7 +100,7 @@ export class TrapezeApp {
         // register Token Interceptor
         this.setupNetworkInterceptors(this.mainWindow.webContents.session);
         // tslint:disable-next-line:no-null-keyword
-        this.mainWindow.setMenu(null);
+        this.mainWindow.setAutoHideMenuBar(true);
         this.mainWindow.loadURL("http://localhost:" + this.config.port + "/index.html");
 
         if (this.config.dev) {
