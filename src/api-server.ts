@@ -51,7 +51,9 @@ export class ApiServer {
         this.app.use("/api", createTrapezeApiRoute(this.config.endpoint));
         this.app.use("/api", api404Handler);
         this.app.use(express.static(this.ngModulePath));
-        this.app.get("/*", (req, res) => {
+        this.app.get("/*", (req: express.Request, res: express.Response) => {
+            // tslint:disable-next-line:no-console
+            console.info("Not found", req.path);
             res.status(404).sendFile(this.ngModulePath + "/index.html");
         });
         this.app.use(createErrorRequestHandler());
