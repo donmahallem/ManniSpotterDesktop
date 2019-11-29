@@ -1,6 +1,6 @@
 {
   "name": "@donmahallem/trapeze-client-electron",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "An electron app to be used with trapeze endpoints",
   "main": "./dist/main.js",
   "private": false,
@@ -59,15 +59,15 @@
     "mocha": "~6.2.2",
     "nyc": "~14.1.1",
     "pug-cli": "~1.0.0-alpha6",
-    "ts-node": "~8.5.2",
+    "ts-node": "~8.5.4",
     "tslint": "~5.20.1",
-    "typedoc": "~0.15.2",
+    "typedoc": "~0.15.3",
     "typescript": "~3.7.2"
   },
   "dependencies": {
-    "@donmahallem/trapeze-api-express-route": "~1.8.3",
-    "@donmahallem/trapeze-api-types": "~1.5.1",
-    "@donmahallem/trapeze-client-ng": "~2.3.1",
+    "@donmahallem/trapeze-api-express-route": "~1.8.4",
+    "@donmahallem/trapeze-api-types": "~1.6.1",
+    "@donmahallem/trapeze-client-ng": "~2.3.2",
     "electron": "~7.1.2",
     "express": "~4.17.1",
     "helmet": "~3.21.2",

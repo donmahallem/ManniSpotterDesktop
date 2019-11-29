@@ -1,5 +1,7 @@
 # Trapeze Api Desktop Client
 
+![Sample Logo](https://raw.githubusercontent.com/donmahallem/TrapezeClientElectron/master/assets/screenshot.png)
+
 ## Setup 1 (requires node install)
 1. npm install -g @donmahallem/trapeze-client-electron
 2. run: trapeze-client [DOMAIN AND PATH OF THE SERVICE]
