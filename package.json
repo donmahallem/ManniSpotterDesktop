@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@types/chai": "~4.2.8",
-    "@types/mocha": "~5.2.7",
+    "@types/mocha": "~7.0.0",
     "@types/sinon": "~7.5.1",
     "asar": "~2.0.3",
     "chai": "~4.2.0",
