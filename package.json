@@ -70,7 +70,7 @@
     "@donmahallem/trapeze-client-ng": "~2.5.0",
     "electron": "~8.2.0",
     "express": "~4.17.1",
-    "helmet": "~3.21.3",
+    "helmet": "~3.22.0",
     "yargs": "~15.3.1"
   },
   "nyc": {
